@@ -29,8 +29,8 @@ services:
         cyberchef.jnms.me -> http://cyberchef:8000,
         d-status.jnms.me -> http://d-status:80,
         sitewatch.jnms.me -> http://sitewatch:5000,
-        jnms.user.zeus.gent -> http://host.docker.internal:8000,
         temp.jnms.me -> http://host.docker.internal:8000,
+        jnms.user.zeus.gent -> http://landing-page:80,
   ##
   # End of Backbone
   ##
