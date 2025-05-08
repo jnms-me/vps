@@ -10,7 +10,7 @@ services:
 
   https-portal:
     image: docker.io/steveltn/https-portal:1
-    restart: unless-stopped
+    restart: no
     ports:
       - "80:80"
       - "443:443"
@@ -22,16 +22,15 @@ services:
       CUSTOM_NGINX_SERVER_CONFIG_BLOCK: |
         client_max_body_size 64G;
       DOMAINS: >
-        jnms.me             -> http://landing-page:80,
-        jnms.user.zeus.gent -> http://landing-page:80,
-        files.jnms.me             -> http://fileserver:80,
-        files.jnms.user.zeus.gent -> http://fileserver:80,
+        jnms.me -> http://landing-page:80,
+        files.jnms.me -> http://fileserver:80,
         ${SYNCTHING_USER}:${SYNCTHING_PASS}@syncthing.jnms.me -> http://syncthing:8384,
         home-theater.jnms.me -> http://home-theater-portal,
         cyberchef.jnms.me -> http://cyberchef:8000,
         d-status.jnms.me -> http://d-status:80,
         sitewatch.jnms.me -> http://sitewatch:5000,
-        temp.jnms.me -> http://172.17.0.1:8000,
+        jnms.user.zeus.gent -> http://host.docker.internal:8000,
+        temp.jnms.me -> http://host.docker.internal:8000,
   ##
   # End of Backbone
   ##
