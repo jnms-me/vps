@@ -33,9 +33,9 @@ Run `bash get-docker.sh`.
 
 Run `systemctl enable --now docker`.
 
-## Aliases
+## Dotfiles
 
-Run `scripts/create-aliases.sh`.
+Run `cd dotfiles && ./dotfiler.sh -d`.
 
 Relog.
 
