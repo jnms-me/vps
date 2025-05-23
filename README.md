@@ -56,7 +56,7 @@ Run `cp crontab /etc/cron.d/docker_services`.
 
 ### Shared symlink
 
-Run `cd && ln -s docker-services/volumes/files/server/shared shared`
+Run `cd && ln -s docker-services/volumes/fileserver/shared shared`
 
 ### Start services
 
