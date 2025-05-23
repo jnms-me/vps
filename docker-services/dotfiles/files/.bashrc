@@ -2,6 +2,7 @@ export EDITOR='vim'
 
 alias nohist="export HISTFILE=/dev/null"
 
+alias ls="ls --color=auto"
 alias la="ls -lA"
 alias ll="ls -lh"
 alias l="ls -lAh"
@@ -18,5 +19,3 @@ alias run-qemu-user-static="docker run --rm --privileged multiarch/qemu-user-sta
 
 alias py="python"
 alias ipy="ipython"
-
-function loop { while true; do $@; done }

@@ -1,48 +1,67 @@
 # Jnms vps config
 
-For rocky linux 9.
+For the "Debian 12 64 bit" template (on racknerd).
+
+Relog after each section.
+
+## Local ssh config
+
+```
+SetEnv TERM=xterm
+
+...
+
+Host jnms.me
+    User root
+```
 
 ## Install stuff
 
 ```
-dnf upgrade --refresh --allowerasing # Takes a while, will kill your ssh session
-systemctl enable --now NetworkManager
-dnf install epel-release
-dnf install vim htop
+apt-get update && apt-get upgrade
+apt-get install mosh vim htop rsync
 ```
-
-## Ssh
-
-Use `ssh-copy-id`.
-
-Disable password auth.
 
 ## Set hostname
 
-Set `/etc/hostname` to `jnms.me`.
+Run `hostnamectl hostname jnms.me`.
 
-Remove the ip line from `/etc/hosts`.
+In `/etc/hosts`, remove the static ip and SolusVM lines.
+
+## Ssh
+
+Run `ssh-copy-id root@jnms.me`.
+
+Comment out `PasswordAuthentication yes` in `/etc/ssh/sshd_config`.
+(Might already be done by `apt-get upgrade`)
+
+Run `systemctl restart sshd`.
 
 ## Install docker
 
-Run `curl -fsSL https://get.docker.com -o get-docker.sh`.
+Run `curl -fsSL https://get.docker.com | bash -`.
 
-Force set `$lsb_dist` to `rhel`.
+## This folder
 
-Run `bash get-docker.sh`.
+Run `rcp docker-services jnms.me:`.
+(`rcp` = `rsync --progress --inplace --recursive --verbose`)
 
-Run `systemctl enable --now docker`.
-
-## Dotfiles
+### Dotfiles
 
 Run `cd dotfiles && ./dotfiler.sh -d`.
 
-Relog.
+### Install crontab
 
-## Start services
+Run `cp crontab /etc/cron.d/docker_services`.
+
+### Shared symlink
+
+Run `cd && ln -s docker-services/volumes/files/server/shared shared`
+
+### Start services
+
+Create `.env` from `.env.example`.
+
+Restore service volumes from backups if needed.
 
 Run `dc up -d`.
-
-## Install crontab
-
-Run `cp crontab /etc/crontab`.

@@ -12,7 +12,7 @@ set ts=4
 set sw=4
 
 "Ignore case for lowercase searches
-set ic sc
+set ic scs
 
 "Smart command tab
 set nocompatible
